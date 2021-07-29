@@ -1,0 +1,325 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class=" col-lg-8 offset-lg-2">
+  
+          <div class="card">
+                    <div class="card-body ">
+  
+                      <h3 class="titulo"> SISTEMA CRUD ANGULAR</h3> 
+                     
+                   </div>
+            </div>
+       </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6"  >
+            <div class="card">
+            <div class="card-body">
+                <h5 class="titulo"> {{ accion | uppercase }}  PERSONAS </h5>
+
+                <form [formGroup]="form" (ngSubmit)="AgregarPersonas()">
+
+
+                    <div  class="input-group  inut-group-lg  mb-3"  >
+                        <span class="input-group-text">
+        
+                            <i class="fab fa-ideal"
+                            
+                            [class.green-icon]="this.form.get ('cod_persona')?.valid"
+                            [class.red-icon]="this.form.get ('cod_persona')?.invalid && this.form.get ('cod_persona')?.touched "
+                            ></i>
+                        </span>
+                        <input formControlName="cod_persona"  type="text"    class="form-control"  readonly  >
+                      </div>
+
+                      <div class="input-group  input-group-lg  mb-3">
+                        <span class="input-group-text">
+        
+                            <i class="fas fa-user"
+                            
+                            [class.green-icon]="this.form.get ('nom_persona')?.valid"
+                            [class.red-icon]="this.form.get ('nom_persona')?.invalid && this.form.get ('nom_persona')?.touched "
+                         
+                            
+                            ></i>
+                        </span>
+                        <input formControlName="nom_persona"     type="text" class="form-control" placeholder="Nombre Persona" >
+                      </div>
+        
+                    
+                    <div class="input-group  input-group-lg  mb-3">
+                        <span class="input-group-text">
+        
+                            <i class="fas fa-table"
+                            
+                            
+                            [class.green-icon]="this.form.get ('fec_nacimiento')?.valid"
+                            [class.red-icon]="this.form.get ('fec_nacimiento')?.invalid && this.form.get ('fec_nacimiento')?.touched "
+                         
+                            ></i>
+                        </span>
+                        <input formControlName="fec_nacimiento"  type="date" class="form-control" placeholder="DD/MM/AAAA" 
+                        
+                        min="1954-01-01" max="2003-02-01" >
+                        
+                      </div>
+        
+
+
+
+
+
+
+
+
+                     
+
+
+
+                      <div class="input-group  input-group-lg  mb-3">
+                        <span class="input-group-text">
+         
+                            <i  class="fas fa-arrows-alt"
+                            
+                            
+                            [class.green-icon]="this.form.get ('cod_sector')?.valid"
+                            [class.red-icon]="this.form.get ('cod_sector')?.invalid && this.form.get ('cod_sector')?.touched "
+                         
+                            ></i>
+                        </span>
+                       
+                        <section>
+                          <label for="workStatus">Sector  </label>
+                          <select name="workStatus"  formControlName="cod_sector">
+                            <option *ngFor="let status of listarSector" [value]="status.cod_sector" (click)="obtenerZona(status.cod_sector)" >
+                              <span>{{ status.des_sector }}</span>
+                            </option>
+                          </select>
+                        </section>
+                      </div>
+
+
+
+
+                      
+    
+
+
+
+                      <div class="input-group  input-group-lg  mb-3">
+                        <span class="input-group-text">
+         
+                            <i  class="fas fa-vector-square"
+                            
+                            [class.green-icon]="this.form.get ('cod_zona')?.valid"
+                            [class.red-icon]="this.form.get ('cod_zona')?.invalid && this.form.get ('cod_zona')?.touched "
+                         
+                            ></i>
+                        </span>
+
+
+                        <section>
+                          <label for="workStatus">Zona</label>
+                          <select name="workStatus" formControlName="cod_zona" >
+                            <option *ngFor="let statu of listarZona" [value]="statu.cod_zona" >
+                              <span>{{ statu.des_zona }}</span>
+                            </option>
+                          </select>
+                        </section>
+                      </div>
+
+
+
+
+                    <div class="input-group  input-group-lg  mb-3">
+                        <span class="input-group-text">
+        
+                            <i class="fas fa-dollar-sign"
+                            
+                            [class.green-icon]="this.form.get ('sueldo')?.valid"
+                            [class.red-icon]="this.form.get ('sueldo')?.invalid && this.form.get ('sueldo')?.touched "
+                         
+                            ></i>
+                        </span>
+                        <input formControlName="sueldo" minlength="1"  type="text" class="form-control" placeholder="Sueldo" >
+                      </div>
+        
+        
+        
+                      <div class="d-grid gap-2">
+                      <button [disabled]="this.form.invalid"  type="submit" class="btn btn-success btn-lg"  >
+                        <i class="fas fa-database"></i>&nbsp;Guadar</button>
+                    </div>
+                  </form>
+
+
+
+
+
+
+
+
+                
+             </div>  
+        </div>  
+        </div>
+
+       
+        <div  class="col-lg-6">
+          <div  *ngIf="Variabl"> 
+            <div class="card">
+                <div class="card-body"  >
+                  <h5 class="titulo"> LISTADO PERSONAS </h5>
+
+
+                  <table class="table">
+
+
+                    <thead>
+                     
+                     
+                      <tr>
+                        
+                    <td scope="row">Codigo Perona</td>
+                        <td>Nombre</td>
+                        <td>Sueldo</td>
+                      </tr>
+                   
+                    </thead>
+
+                  
+                    <tbody >
+               
+                        <tr *ngFor="let personas of  AgruparSector ">
+                           
+                         
+                          <td> {{personas.des_sector}}</td>
+                         
+                            <td> {{personas.des_zona}}</td>
+                           
+                            <td> {{personas.sueldo}}</td>
+
+                           
+
+
+                            
+                            <td> 
+                                
+                              <i (click)="obtenerPersonas()"      class="far fa-arrow-alt-circle-right   text-inf"  text="selecionar"></i>
+                          
+                          </td>
+                           
+                            
+                        </tr>
+                    </tbody>
+
+                
+                </table>
+
+                </div>
+            </div>
+          </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div  *ngIf="!Variabl"> 
+            <div class="card">
+                <div class="card-body"  >
+                  <h5 class="titulo"> LISTADO  SECTOR </h5>
+
+
+                  <table class="table">
+
+
+
+
+
+
+
+
+
+                  <thead>
+                     
+                     
+                    <tr>
+                      
+                  <td scope="row">Sector</td>
+                      <td>Zona</td>
+                     
+                      <td>Sueldo</td>
+                  
+                    </tr>
+                 
+                  </thead>
+
+                
+                  <tbody >
+             
+                      <tr *ngFor="let personas of  listarPersonas ">
+                         
+                       
+                        <td> {{personas.des_sector}}</td>
+                       
+                          <td> {{personas.des_zona}}</td>
+                         
+                          <td> {{personas.sueldo}}</td>
+
+                         
+
+
+                          <td> 
+                              
+                              <i  (click)="editarPersona(personas)" class="fas fa-edit    text-inf"></i>
+                          
+                          </td>
+      
+                          <td> 
+                              
+                              <i (click)="eliminarpersona(personas.cod_persona)"  class="fas fa-trash-alt text-danger"></i>
+                          
+                          </td>
+                          <td> 
+                              
+                            <i (click)="AgruparporSector(personas.cod_sector)"  class="far fa-arrow-alt-circle-right   text-inf"   text="selecionar"></i>
+                        
+                        </td>
+                         
+                          
+                      </tr>
+                  </tbody>
+
+                
+                </table>
+
+                </div>
+            </div>
+          </div>
+        </div> 
+
+    </div>    
+
+
+</div>
